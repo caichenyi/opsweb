@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block container %}
+
+    <div class="side-body padding-top">
+        <h1>修改密码</h1>
+        <form action="{% url 'account:modify_pw' %}" method="POST">
+            <input type="hidden" id="uid" name="uid" class="form-control" placeholder="用户编号" value="{{ request.user.id }}" required="" />
+            <input type="password" id="old_password" name="old_password" class="form-control" placeholder="旧密码" required="" /><br />
+            <input type="password" id="new_password" name="new_password" class="form-control" placeholder="新密码" required="" /><br />
+            <input type="password" id="new_password_confirm" name="new_password_confirm" class="form-control" placeholder="新密码确认" required="" /><br />
+            <input type="submit" class="btn btn-default submit" value="密码修改">
+            <font color="red">{{ info }}</font>
+        </form>
+    </div>
+
+{% endblock %}

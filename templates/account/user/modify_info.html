@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block container %}
+
+    <div class="side-body padding-top">
+        <h1>修改信息</h1>
+        <form action="{% url 'account:modify_info' %}" method="POST">
+            <input type="hidden" id="uid" name="uid" class="form-control" placeholder="用户编号" value="{{ request.user.id }}" required="" />
+            <input type="email" id="email" name="email" class="form-control" placeholder="email" value="{{ request.user.email }}" required="" /><br />
+            <input type="text" id="last_name" name="last_name" class="form-control" placeholder="姓" value="{{ request.user.last_name }}" required="" /><br />
+            <input type="text" id="first_name" name="first_name" class="form-control" placeholder="名" value="{{ request.user.first_name }}" required="" /><br />
+            <input type="submit" class="btn btn-default submit" value="信息修改">
+            <font color="red">{{ info }}</font>
+        </form>
+    </div>
+
+{% endblock %}
