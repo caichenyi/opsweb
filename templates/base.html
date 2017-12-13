@@ -136,7 +136,9 @@
                                                 <li><a href="{% url 'account:deleteuser' %}">删除用户</a></li>
                                             {% endif %}
                                             <li><a href="{% url 'account:modify_info' %}">修改用户信息</a></li>
+                                            {% if perms.account.user_manage %}
                                             <li><a href="{% url 'account:modify_pw' %}">修改密码</a></li>
+                                            {% endif %}
                                         </ul>
                                     </div>
                                 </div>

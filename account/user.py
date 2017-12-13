@@ -5,8 +5,8 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import authenticate, login, logout #用户认证
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth.models import User
-from django import forms
-from django.db import models
+from ldap3 import *
+from opsweb import settings
 
 
 @login_required
@@ -20,13 +20,24 @@ def userlogin(request):
     else:
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            # 用户名密码正确
+        conn = Connection(server=Server(settings.LDAP_URL, port=settings.LDAP_PORT), user=settings.LDAP_PREFIX + username, password=password)
+        if conn.bind():
+            if not User.objects.filter(username=username):
+                user = User.objects.create_user(username=username, password=password)
+            else:
+                user = User.objects.get(username=username)
+                user.set_password(password)
+            conn.search(settings.BASE_DN, '(objectCategory=person)', search_scope=SUBTREE, attributes=['sAMAccountName', 'name', 'mail', 'manager', 'Sn', 'GivenName'])
+            for i in conn.entries:
+                if username == i.sAMAccountName:
+                    user.first_name = i.GivenName
+                    user.last_name = i.Sn
+                    user.email = i.Mail
+                    break
+            user.save()
             login(request, user)
             return HttpResponseRedirect(reverse('account:index'))
         else:
-            # 用户名密码错误
             context = {'info': '╭∩╮  认证失败  ╭∩╮'}
             return render(request, 'account/user/login.html', context)
 
@@ -35,12 +46,6 @@ def userlogin(request):
 def userlogout(request):
     logout(request)
     return HttpResponseRedirect(reverse('account:login'))
-
-
-@permission_required('account.user_manage')
-@login_required
-def listuser(request):
-    pass
 
 
 @permission_required('account.user_manage')
@@ -90,6 +95,7 @@ def adduser(request):
         return render(request, 'account/user/adduser.html', context)
 
 
+@permission_required('account.user_manage')
 @login_required
 def modify_pw(request):
     if request.method == "GET":

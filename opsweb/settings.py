@@ -142,3 +142,9 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = '768683868@qq.com'
 EMAIL_HOST_PASSWORD = 'gddkybduyccwbbfc'
 EMAIL_USE_TLS = True
+
+# LDAP
+LDAP_URL = '192.168.20.100'
+LDAP_PORT = 389
+LDAP_PREFIX = 'hq\\'
+BASE_DN = 'OU=技术中心,OU=WH,DC=hq,DC=wwwarehouse,DC=com'
