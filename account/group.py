@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import authenticate, login, logout #用户认证
 from django.contrib.auth.models import User, Group, Permission
 
+
 @permission_required('account.group_manage')
 @login_required
 def addgroup(request):

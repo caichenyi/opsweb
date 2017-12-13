@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django import forms
 from django.db import models
 
+
 @login_required
 def index(request):
     return render(request, 'index.html')
@@ -34,6 +35,12 @@ def userlogin(request):
 def userlogout(request):
     logout(request)
     return HttpResponseRedirect(reverse('account:login'))
+
+
+@permission_required('account.user_manage')
+@login_required
+def listuser(request):
+    pass
 
 
 @permission_required('account.user_manage')
