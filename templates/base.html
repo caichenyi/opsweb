@@ -146,11 +146,11 @@
                             <!-- 用户组管理 -->
                             {% if perms.account.user_manage %}
                                 <li class="panel panel-default dropdown">
-                                    <a data-toggle="collapse" href="#dropdown-group">
+                                    <a data-toggle="collapse" href="#dropdown-sqldeploy">
                                         <span class="icon fa fa-desktop"></span><span class="title">用户组管理</span>
                                     </a>
                                     <!-- Dropdown level 1 -->
-                                    <div id="dropdown-group" class="panel-collapse collapse">
+                                    <div id="dropdown-sqldeploy" class="panel-collapse collapse">
                                         <div class="panel-body">
                                             <ul class="nav navbar-nav">
                                                 <li><a href="{% url 'account:addgroup' %}">添加用户组</a></li>
@@ -164,6 +164,25 @@
                                     </div>
                                 </li>
                             {% endif %}
+                            <!-- db_deploy -->
+                            <li class="panel panel-default dropdown">
+                                <a data-toggle="collapse" href="#dropdown-group">
+                                    <span class="icon fa fa-desktop"></span><span class="title">sql deploy</span>
+                                </a>
+                                <!-- Dropdown level 1 -->
+                                <div id="dropdown-group" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <ul class="nav navbar-nav">
+                                            <li><a href="{% url 'sqldeploy:index' %}">sql 提交</a></li>
+{#                                            <li><a href="{% url 'account:deletegroup' %}">sql 审核</a></li>#}
+{#                                            <li><a href="{% url 'account:intogroup' %}">用户添加用户组</a></li>#}
+{#                                            <li><a href="{% url 'account:removegroup' %}">用户删除用户组</a></li>#}
+{#                                            <li><a href="{% url 'account:addperm' %}">用户组添加权限</a></li>#}
+{#                                            <li><a href="{% url 'account:deleteperm' %}">用户组删除权限</a></li>#}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->

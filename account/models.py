@@ -8,4 +8,4 @@ class OpsPerm(models.Model):
         permissions = (
             ('user_manage', '用户管理'),
             ('group_manage', '用户组管理'),
-        )
+)
