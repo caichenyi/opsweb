@@ -12,8 +12,8 @@ class SqlInfo(models.Model):
     dev_reviewer = models.CharField(max_length=64)
     dba_reviewer = models.CharField(max_length=64)
     intergrator = models.CharField(max_length=64)
-    submit_time = models.DateField(null=True)
-    intergrate_time = models.DateField(null=True)
+    submit_time = models.DateTimeField(null=True)
+    intergrate_time = models.DateTimeField(null=True)
 
     def __str__(self):
         tpl = '<SqlInfo:[id={id}, title={title}, content={content}, status={status}, submiter={submiter}, ' \
