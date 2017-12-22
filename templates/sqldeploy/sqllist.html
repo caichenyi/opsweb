@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block container %}
+
+    <div class="side-body padding-top">
+        <ul class="nav nav-pills">
+            {{ sqllist }}
+            <br/>
+            <li role="presentation" {% if status == '5' %} class="active" {% endif %}><a href="{% url 'sqldeploy:sqllist' 5 %}">所有sql</a></li>
+            <li role="presentation" {% if status == '0' %} class="active" {% endif %}><a href="{% url 'sqldeploy:sqllist' 0 %}">待研发审核</a></li>
+            <li role="presentation" {% if status == '1' %} class="active" {% endif %}><a href="{% url 'sqldeploy:sqllist' 1 %}">待dba审核</a></li>
+            <li role="presentation" {% if status == '2' %} class="active" {% endif %}><a href="{% url 'sqldeploy:sqllist' 2 %}">待发布</a></li>
+            <li role="presentation" {% if status == '3' %} class="active" {% endif %}><a href="{% url 'sqldeploy:sqllist' 3 %}">已发布</a></li>
+            <li role="presentation" {% if status == '4' %} class="active" {% endif %}><a href="{% url 'sqldeploy:sqllist' 4 %}">已drop</a></li>
+        </ul>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>编号</th>
+                <th>标题名</th>
+                <th>数据库名</th>
+                <th>sql内容</th>
+                <th>状态</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for sql in sqllist %}
+                <tr>
+                    <th>{{ sql.id }}</th>
+                    <th>{{ sql.title }}</th>
+                    <th>{{ sql.db_env }}</th>
+                    <th>{{ sql.content }}</th>
+                    <th>{{ sql.status }}</th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+<div class="side-menu sidebar-inverse">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="side-menu-container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <div class="icon fa fa-paper-plane"></div>
+                    <div class="title">CYWEB</div>
+                </a>
+                <button type="button" class="navbar-expand-toggle pull-right visible-xs">
+                    <i class="fa fa-times icon"></i>
+                </button>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="#">
+                        <span class="icon fa fa-tachometer"></span><span class="title">Dashboard</span>
+                    </a>
+                </li>
+                <!-- 用户管理 -->
+                <li class="panel panel-default dropdown">
+                    <a data-toggle="collapse" href="#dropdown-user">
+                        <span class="icon fa fa-desktop"></span><span class="title">用户管理</span>
+                    </a>
+                    <!-- Dropdown level 1 -->
+                    <div id="dropdown-user" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul class="nav navbar-nav">
+{#                                {% if perms.account.user_manage %}#}
+{#                                    <li><a href="{% url 'account:adduser' %}">添加用户</a></li>#}
+{#                                    <li><a href="{% url 'account:deleteuser' %}">删除用户</a></li>#}
+{#                                {% endif %}#}
+{#                                <li><a href="{% url 'account:modify_info' %}">修改用户信息</a></li>#}
+{#                                {% if perms.account.user_manage %}#}
+{#                                    <li><a href="{% url 'account:modify_pw' %}">修改密码</a></li>#}
+{#                                {% endif %}#}
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <!-- sql发布管理 -->
+                <li class="panel panel-default dropdown">
+                    <a data-toggle="collapse" href="#dropdown-group">
+                        <span class="icon fa fa-desktop"></span><span class="title">sql deploy</span>
+                    </a>
+                    <!-- Dropdown level 1 -->
+                    <div id="dropdown-group" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul class="nav navbar-nav">
+                                <li><a href="{% url 'sqldeploy:createdb' %}">添加数据库环境</a></li>
+                                <li><a href="{% url 'sqldeploy:submitsql' %}">sql提交</a></li>
+                                <li><a href="{% url 'sqldeploy:sqllist' 5 %}">sql列表</a></li>
+                                {#                                            <li><a href="{% url 'account:removegroup' %}">用户删除用户组</a></li>#}
+                                {#                                            <li><a href="{% url 'account:addperm' %}">用户组添加权限</a></li>#}
+                                {#                                            <li><a href="{% url 'account:deleteperm' %}">用户组删除权限</a></li>#}
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
+</div>

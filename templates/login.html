@@ -4,18 +4,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>opsweb</title>
+    <title>cyweb</title>
     <link rel="stylesheet" type="text/css" href="{% static 'lib/css/bootstrap.min.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'lib/css/custom.min.css' %}"/>
 </head>
 <body>
-{#<form method="POST" action="#">#}
-{#    <h2>Sign In</h2>#}
-{#    <input type="text" class="form-control" placeholder="Username" name="username" value="">#}
-{#    <input type="password" class="form-control" placeholder="Password" name="password" value="">#}
-{#    <button type="submit" class="btn btn-primary" id="btn_login">登录</button>#}
-{#    <button type="button" class="btn btn-link" id="btn_reset_password">忘记密码</button>#}
-{#</form>#}
 
 <body class="login">
 <div>
@@ -27,12 +20,7 @@
             <section class="login_content">
                 <form method="POST"  action="#" >
                     <h1>自动化运维平台</h1>
-                    <div>
-                        <input type="text" id="username" name="username" class="form-control" placeholder="用户名" required="" />
-                    </div>
-                    <div>
-                        <input type="password" id="password" name="password" class="form-control" placeholder="密码" required="" />
-                    </div>
+                    {{ form.as_table }}
                     <div>
                         <label class="control-label left">
                             验证码：<span id="gencode"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp

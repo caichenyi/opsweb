@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block container %}
+
+    <div class="side-body padding-top">
+        <h1>提交数据sql</h1>
+        <form method="POST" id="form_submit">
+            {{ form.as_table }}
+            <input type="submit" class="btn btn-default submit" value="提交">
+            <font color="red">{{ info }}</font>
+        </form>
+    </div>
+
+{% endblock %}
