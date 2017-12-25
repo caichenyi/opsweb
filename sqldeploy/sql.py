@@ -1,5 +1,8 @@
 from django.views.generic import View
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, permission_required
 from django.utils import timezone
 
@@ -32,6 +35,31 @@ class SqlListView(View):
             sqllist = models.SqlInfo.objects.all()
         else:
             sqllist = models.SqlInfo.objects.filter(status=kwargs['status'])
-        print(sqllist)
         context['sqllist'] = sqllist
         return render(request, 'sqldeploy/sqllist.html', context=context)
+
+
+class SqlDropView(View):
+
+    def get(self, request, *args, **kwargs):
+        sqlinfo = models.SqlInfo.objects.get(id=kwargs['id'])
+        sqlinfo.status = 4
+        sqlinfo.dropper = kwargs['user_id']
+        sqlinfo.save()
+        return HttpResponseRedirect(reverse('sqldeploy:sqllist', args=(5,)))
+
+
+class SqlReviewView(View):
+
+    def get(self, request, *args, **kwargs):
+        sqlinfo = models.SqlInfo.objects.get(id=kwargs['id'])
+        if sqlinfo.status == 0:
+            sqlinfo.dev_reviewer = kwargs['user_id']
+        elif sqlinfo.status == 1:
+            sqlinfo.dba_reviewer = kwargs['user_id']
+        elif sqlinfo.status == 2:
+            sqlinfo.intergrator = kwargs['user_id']
+        sqlinfo.status = sqlinfo.status + 1
+        sqlinfo.save()
+        return HttpResponseRedirect(reverse('sqldeploy:sqllist', args=(5,)))
+
