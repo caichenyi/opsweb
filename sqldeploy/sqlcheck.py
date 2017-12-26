@@ -24,3 +24,19 @@ def sql_selfreview(dbenv, content):
         cursor.close()
         db.close()
         return False
+
+
+def sql_deploy(dbenv, content):
+    sql = content
+    db = pymysql.connect(host=dbenv.db_host, user=dbenv.username, passwd=dbenv.password, port=dbenv.db_port, db=dbenv.db_name)
+    cursor = db.cursor()
+    try:
+        cursor.execute(sql)
+        cursor.close()
+        db.commit()
+        db.close()
+        return True
+    except:
+        cursor.close()
+        db.close()
+        return False

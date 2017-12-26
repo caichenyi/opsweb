@@ -59,6 +59,9 @@ class SqlReviewView(View):
             sqlinfo.dba_reviewer = kwargs['user_id']
         elif sqlinfo.status == 2:
             sqlinfo.intergrator = kwargs['user_id']
+            dbenv = models.DbEnv.objects.get(id=sqlinfo.db_env)
+            sqlcheck.sql_deploy(dbenv=dbenv, content=sqlinfo.content)
+            sqlinfo.intergrate_time = timezone.now()
         sqlinfo.status = sqlinfo.status + 1
         sqlinfo.save()
         return HttpResponseRedirect(reverse('sqldeploy:sqllist', args=(5,)))
